@@ -9,7 +9,8 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   group('Form Submission Integration Tests', () {
-    testWidgets('Shows validation errors on EditProfileScreen', (WidgetTester tester) async {
+    testWidgets('Shows validation errors on EditProfileScreen', (
+        WidgetTester tester) async {
       await tester.pumpWidget(
         ProviderScope(
           child: MaterialApp(home: EditProfileScreen()),
@@ -23,7 +24,8 @@ void main() {
       expect(find.textContaining('Please enter'), findsWidgets);
     });
 
-    testWidgets('Shows validation errors on InvitationScreen', (WidgetTester tester) async {
+    testWidgets('Shows validation errors on InvitationScreen', (
+        WidgetTester tester) async {
       await tester.pumpWidget(
         ProviderScope(
           child: MaterialApp(home: InvitationScreen()),
@@ -37,7 +39,8 @@ void main() {
       expect(find.text('Required'), findsWidgets);
     });
 
-    testWidgets('Successfully submits profile edit and invitation', (WidgetTester tester) async {
+    testWidgets('Successfully submits profile edit and invitation', (
+        WidgetTester tester) async {
       await tester.pumpWidget(
         ProviderScope(
           child: MaterialApp(home: EditProfileScreen()),
@@ -61,7 +64,8 @@ void main() {
       await tester.enterText(find.byKey(Key('age')), '6');
       await tester.enterText(find.byKey(Key('address')), 'Addis Ababa');
       await tester.enterText(find.byKey(Key('guardianPhone')), '0912345678');
-      await tester.enterText(find.byKey(Key('guardianEmail')), 'liam@example.com');
+      await tester.enterText(
+          find.byKey(Key('guardianEmail')), 'liam@example.com');
 
       await tester.tap(find.widgetWithText(ElevatedButton, 'Submit'));
       await tester.pumpAndSettle();

@@ -12,7 +12,8 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   group('User Journey Integration Tests', () {
-    testWidgets('User logs in, edits profile, and submits invitation', (WidgetTester tester) async {
+    testWidgets('User logs in, edits profile, and submits invitation', (
+        WidgetTester tester) async {
       await tester.pumpWidget(
         ProviderScope(
           child: MyApp(),
@@ -53,14 +54,16 @@ void main() {
       await tester.enterText(find.byKey(Key('age')), '6');
       await tester.enterText(find.byKey(Key('address')), 'Addis Ababa');
       await tester.enterText(find.byKey(Key('guardianPhone')), '0912345678');
-      await tester.enterText(find.byKey(Key('guardianEmail')), 'liam@example.com');
+      await tester.enterText(
+          find.byKey(Key('guardianEmail')), 'liam@example.com');
       await tester.tap(find.widgetWithText(ElevatedButton, 'Submit'));
       await tester.pumpAndSettle();
 
       expect(find.text('Invitation submitted successfully!'), findsOneWidget);
     });
 
-    testWidgets('Displays error message for invalid login', (WidgetTester tester) async {
+    testWidgets('Displays error message for invalid login', (
+        WidgetTester tester) async {
       await tester.pumpWidget(
         ProviderScope(
           child: MyApp(),

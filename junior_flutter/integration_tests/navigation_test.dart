@@ -12,7 +12,8 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   group('Navigation Flow Integration Tests', () {
-    testWidgets('User moves between Home, Profile, and Invitation screens', (WidgetTester tester) async {
+    testWidgets('User moves between Home, Profile, and Invitation screens', (
+        WidgetTester tester) async {
       await tester.pumpWidget(
         ProviderScope(
           child: MyApp(),
@@ -39,7 +40,8 @@ void main() {
       expect(find.byType(HomeScreen), findsOneWidget);
     });
 
-    testWidgets('Maintains user session during navigation', (WidgetTester tester) async {
+    testWidgets('Maintains user session during navigation', (
+        WidgetTester tester) async {
       await tester.pumpWidget(
         ProviderScope(
           child: MyApp(),
@@ -48,7 +50,10 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      final userProvider = tester.widget<ProviderScope>(find.byType(ProviderScope)).container.read(userProvider.notifier);
+      final userProvider = tester
+          .widget<ProviderScope>(find.byType(ProviderScope))
+          .container
+          .read(userProvider.notifier);
       userProvider.updateUserProfileData('John', 'Doe', 'john@example.com');
 
       await tester.tap(find.widgetWithText(ElevatedButton, 'Edit Profile'));

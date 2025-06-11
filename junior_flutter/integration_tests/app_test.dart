@@ -12,7 +12,8 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   group('App Integration Tests', () {
-    testWidgets('Navigates between screens successfully', (WidgetTester tester) async {
+    testWidgets(
+        'Navigates between screens successfully', (WidgetTester tester) async {
       await tester.pumpWidget(
         ProviderScope(
           child: MyApp(),
@@ -32,7 +33,8 @@ void main() {
       expect(find.byType(InvitationScreen), findsOneWidget);
     });
 
-    testWidgets('Validates form submission in EditProfileScreen', (WidgetTester tester) async {
+    testWidgets('Validates form submission in EditProfileScreen', (
+        WidgetTester tester) async {
       await tester.pumpWidget(
         ProviderScope(
           child: MaterialApp(home: EditProfileScreen()),
@@ -48,7 +50,8 @@ void main() {
       expect(find.text('Profile updated successfully!'), findsOneWidget);
     });
 
-    testWidgets('Saves new invitation in InvitationScreen', (WidgetTester tester) async {
+    testWidgets('Saves new invitation in InvitationScreen', (
+        WidgetTester tester) async {
       await tester.pumpWidget(
         ProviderScope(
           child: MaterialApp(home: InvitationScreen()),
@@ -59,7 +62,8 @@ void main() {
       await tester.enterText(find.byKey(Key('age')), '6');
       await tester.enterText(find.byKey(Key('address')), 'Addis Ababa');
       await tester.enterText(find.byKey(Key('guardianPhone')), '0912345678');
-      await tester.enterText(find.byKey(Key('guardianEmail')), 'liam@example.com');
+      await tester.enterText(
+          find.byKey(Key('guardianEmail')), 'liam@example.com');
 
       await tester.tap(find.widgetWithText(ElevatedButton, 'Submit'));
       await tester.pumpAndSettle();
