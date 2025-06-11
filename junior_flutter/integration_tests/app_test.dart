@@ -41,9 +41,9 @@ void main() {
         ),
       );
 
-      await tester.enterText(find.byKey(Key('firstName')), 'Hawi');
-      await tester.enterText(find.byKey(Key('lastName')), 'Olani');
-      await tester.enterText(find.byKey(Key('email')), 'hawi@example.com');
+      await tester.enterText(find.byKey(Key('firstName')), 'jon');
+      await tester.enterText(find.byKey(Key('lastName')), 'doe');
+      await tester.enterText(find.byKey(Key('email')), 'jon@example.com');
       await tester.tap(find.widgetWithText(ElevatedButton, 'Save'));
       await tester.pumpAndSettle();
 
