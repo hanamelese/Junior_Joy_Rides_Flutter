@@ -109,6 +109,16 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  # dependencies for testing
+  provider: ^6.0.5
+  integration_test:
+    sdk: flutter
+  mockito: ^5.0.17
+  build_runner: ^2.0.0
+  test: ^1.24.2
+  connectivity_plus: ^4.0.2
+
   # Google Drive and authentication dependencies
   youtube_player_flutter: ^9.1.1
   googleapis: ^14.0.0
