@@ -76,6 +76,7 @@ void main() {
 
     final json = wishListItem.toJsonForPatch();
 
+
     expect(json['id'], 3);
     expect(json['childName'], '');
     expect(json['guardianEmail'], '');

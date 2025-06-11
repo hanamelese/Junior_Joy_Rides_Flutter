@@ -80,6 +80,7 @@ void main() {
   });
 
   test('InvitationItem correctly formats JSON for patch API', () {
+
     final invitationItem = InvitationItem(id: 3);
 
     final json = invitationItem.toJsonForPatch();

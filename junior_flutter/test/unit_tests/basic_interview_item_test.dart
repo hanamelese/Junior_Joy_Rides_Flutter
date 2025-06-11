@@ -70,6 +70,7 @@ void main() {
   });
 
   test('BasicInterviewItem correctly formats JSON for patch API', () {
+
     final interviewItem = BasicInterviewItem(id: 3);
 
     final json = interviewItem.toJsonForPatch();
