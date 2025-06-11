@@ -1,122 +1,98 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:junior_flutter/core/internet_services/dio_client.dart';
+import 'package:junior_flutter/features/crud/presentation/components/birthday_management.dart';
+import 'package:junior_flutter/features/crud/presentation/screens/admin_dashboard.dart';
+import 'package:junior_flutter/features/crud/presentation/screens/basicInterviewScreen.dart';
+import 'package:junior_flutter/features/crud/presentation/screens/editProfileScreen.dart';
+// import 'package:junior_flutter/features/crud/presentation/screens/interview_management.dart';
+import 'package:junior_flutter/features/crud/presentation/screens/invitationScreen.dart';
+import 'package:junior_flutter/features/crud/presentation/screens/landing_screen.dart';
+// import 'package:junior_flutter/features/crud/presentation/screens/management_section.dart';
+import 'package:junior_flutter/features/crud/presentation/screens/profileScreen.dart';
+import 'package:junior_flutter/features/crud/presentation/screens/specialInterviewScreen.dart';
+import 'package:junior_flutter/features/crud/presentation/screens/wishListScreen.dart';
+import 'package:junior_flutter/features/crud/presentation/screens/signupScreen.dart';
+import 'package:junior_flutter/features/crud/presentation/screens/loginScreen.dart';
+import 'features/crud/presentation/screens/get_started.dart';
+import 'widgets/base_scaffold.dart';
 
 void main() {
-  runApp(const MyApp());
+  DioClient.instance.initialize(); // Initialize DioClient
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Junior Flutter',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+      initialRoute: '/get_started', // Set GetStartedScreen as initial route
+      routes: {
+        // Get Started Screen
+        '/get_started': (context) => GetStartedScreen(
+          onNavigate: (route) {
+            Navigator.pushNamed(context, route);
+          },
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+        // Pages without drawer or footer
+        '/edit-profile':(context)=>  EditProfileScreen(),
+        '/user-signup': (context) => const SignupScreen(),
+        '/user-login': (context) => const LoginScreen(),
+        '/edit-profile': (context) => EditProfileScreen(),
+        // Pages with drawer and bottom nav bar
+        '/AdminDashboardScreen': (context) => const BaseScaffold(
+          title: 'Admin Dashboard',
+          body: AdminDashboardScreen(),
+          currentIndex: 0,
+        ),
+        '/birthday': (context) => const BaseScaffold(
+          title: 'Birthday',
+          body: InvitationScreen(),
+          currentIndex: 1,
+        ),
+        '/basic-interview': (context) => const BaseScaffold(
+          title: 'Basic Interview',
+          body: BasicInterviewScreen(),
+          currentIndex: 2,
+        ),
+        '/profile': (context) => const BaseScaffold(
+          title: 'Profile',
+          body: ProfileScreen(),
+          currentIndex: 3,
+        ),
+        '/wishList': (context) => const BaseScaffold(
+          title: 'Wish List',
+          body: WishListScreen(),
+          currentIndex: 0,
+        ),
+        '/home': (context) => const BaseScaffold(
+          title: 'Home Page',
+          body: LandingScreen(),
+          currentIndex: 0,
+        ),
+        // '/interviewManagment': (context) => const BaseScaffold(
+        //   title: 'Interview Management',
+        //   body: InterviewManagementScreen(),
+        //   currentIndex: 2,
+        // ),
+        '/invitation': (context) => const BaseScaffold(
+          title: 'Invitation',
+          body: InvitationScreen(),
+          currentIndex: 1,
+        ),
+        '/specialInterview': (context) => const BaseScaffold(
+          title: 'Special Interview',
+          body: SpecialInterviewScreen(),
+          currentIndex: 2,
+        ),
+      },
     );
   }
 }
